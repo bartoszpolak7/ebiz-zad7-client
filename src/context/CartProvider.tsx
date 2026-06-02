@@ -29,14 +29,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => setCart([]);
 
-  const getTotal = () => {
+  const getTotal = useMemo(() => {
      const productMap = new Map(products.map(p => [p.id, p]));
 
-     return cart.reduce((sum, item) => {
-       const product = productMap.get(item.productId);
-       return sum + (product ? product.price * item.amount : 0);
-     }, 0);
-  };
+     return () =>
+       cart.reduce((sum, item) => {
+         const product = productMap.get(item.productId);
+         return sum + (product ? product.price * item.amount : 0);
+       }, 0);
+  }, [cart, products]);
 
   return (
     <CartContext.Provider value={useMemo(() => ({ cart, addToCart, clearCart, getTotal }), [cart, getTotal])}>

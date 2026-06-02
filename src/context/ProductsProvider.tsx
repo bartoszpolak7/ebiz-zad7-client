@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../types";
 import { getProducts } from "../api/api";
 import { ProductsContext } from "./ProductsContext";

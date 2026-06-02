@@ -6,7 +6,17 @@ COPY package*.json ./
 
 RUN npm ci --ignore-scripts
 
-COPY . .
+COPY tsconfig.json tsconfig.app.json tsconfig.node.json ./
+
+COPY src ./src
+
+COPY index.html ./
+
+COPY vite.config.ts ./
+
+RUN adduser -D appuser && chown -R appuser /app
+
+USER appuser
 
 EXPOSE 5173
 

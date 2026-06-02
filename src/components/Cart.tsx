@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { getProducts } from "../api/api";
 import type { Product } from "../types";
-import { CartContext } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
 
 export const Cart = () => {
-  const cartState = useContext(CartContext);
+  const cartState = useCart();
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {

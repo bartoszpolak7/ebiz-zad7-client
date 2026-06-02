@@ -54,7 +54,7 @@ describe("PaymentForm", () => {
       getTotal: () => 49.99,
     };
 
-    vi.spyOn(window, "alert").mockImplementation(() => {});
+    vi.spyOn(globalThis, "alert").mockImplementation(() => {});
 
     renderPaymentForm(cartState);
     fireEvent.click(screen.getByRole("button", { name: /pay now/i }));
@@ -62,7 +62,7 @@ describe("PaymentForm", () => {
     await waitFor(() => {
       expect(sendPayment).toHaveBeenCalledWith({ total: 49.99 });
       expect(clearCart).toHaveBeenCalled();
-      expect(window.alert).toHaveBeenCalledWith("Payment successful!");
+      expect(globalThis.alert).toHaveBeenCalledWith("Payment successful!");
     });
   });
 });

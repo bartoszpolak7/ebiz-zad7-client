@@ -1,4 +1,4 @@
-import { useContext, useState, type ReactNode } from "react";
+import { useContext, useMemo, useState, type ReactNode } from "react";
 import type { CartItem, Product } from "../types";
 import { CartContext } from "./CartContext";
 import { ProductsContext } from "./ProductsContext";
@@ -39,7 +39,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart, getTotal }}>
+    <CartContext.Provider value={useMemo(() => ({ cart, addToCart, clearCart, getTotal }), [cart, getTotal])}>
       {children}
     </CartContext.Provider>
   );

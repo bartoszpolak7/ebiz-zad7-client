@@ -1,8 +1,7 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { useContext } from "react";
 import { CartProvider } from "../context/CartProvider";
-import { CartContext } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
 import { ProductsContext } from "../context/ProductsContext";
 import type { Product } from "../types";
 
@@ -13,7 +12,7 @@ const sampleProducts: Product[] = [
 ];
 
 function CartProbe() {
-  const { cart, addToCart, clearCart, getTotal } = useContext(CartContext);
+  const { cart, addToCart, clearCart, getTotal } = useCart();
 
   return (
     <div>
